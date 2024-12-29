@@ -84,20 +84,20 @@ public class CourseServiceImpl implements CourseService {
     // Helper method to save an image to the file system
     private String saveImage(MultipartFile imageFile) {
         try {
-            Path imageDirPath = Paths.get(IMAGE_DIR);
+            Path imageDirPath = Paths.get("C:\\Users\\samib\\Desktop\\9antra.tn\\mongodb-springboot\\uploads");
             if (!Files.exists(imageDirPath)) {
                 Files.createDirectories(imageDirPath);
             }
-
             String imageFileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
             Path imagePath = imageDirPath.resolve(imageFileName);
-
             imageFile.transferTo(imagePath.toFile());
-            return imagePath.toString();
+            return "/uploads/" + imageFileName;
         } catch (IOException e) {
             throw new RuntimeException("Failed to save image", e);
         }
     }
+
+
 
     // Helper method to delete an image file from the file system
     private void deleteImageFile(String imagePath) {
